@@ -11,7 +11,7 @@ from six.moves.urllib import parse as urlparse
 
 # ujson is not installable with pypy
 try:
-    import ujson as json  # NOQA
+    import ultrajson as json  # NOQA
 except ImportError:  # pragma: no cover
     import json  # NOQA
 
