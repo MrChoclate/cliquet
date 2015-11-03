@@ -7,14 +7,15 @@ import six
 import time
 from base64 import b64decode, b64encode
 from binascii import hexlify
-from functools import partial
 from six.moves.urllib import parse as urlparse
 
 # ultrajson is not installable with pypy
 try:
     import ultrajson as json  # NOQA
 
-    json_serializer = partial(json.dumps, escape_forward_slashes=False)
+    def json_serializer(v, **kw):
+        return json.dumps(v, escape_forward_slashes=False)
+
 except ImportError:  # pragma: no cover
     import json  # NOQA
 
