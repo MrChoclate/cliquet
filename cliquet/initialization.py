@@ -50,8 +50,7 @@ def setup_json_serializer(config):
     requests.models.json = utils.json
 
     # Override json renderer using ujson
-    renderer = JSONRenderer(serializer=lambda v, **kw: utils.json.dumps(
-        v, escape_forward_slashes=False))
+    renderer = JSONRenderer(serializer=utils.json_serializer)
     config.add_renderer('json', renderer)
 
 
