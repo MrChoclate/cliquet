@@ -54,7 +54,8 @@ class Model(object):
             auth=self.auth)
 
     def get_records(self, filters=None, sorting=None, pagination_rules=None,
-                    limit=None, include_deleted=False, parent_id=None):
+                    limit=None, include_deleted=False, parent_id=None,
+                    hidden_fields=[]):
         """Fetch the collection records.
 
         Override to post-process records after feching them from storage.
@@ -101,7 +102,8 @@ class Model(object):
             id_field=self.id_field,
             modified_field=self.modified_field,
             deleted_field=self.deleted_field,
-            auth=self.auth)
+            auth=self.auth,
+            hidden_fields=hidden_fields)
         return records, total_records
 
     def delete_records(self, filters=None, parent_id=None):

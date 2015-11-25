@@ -34,6 +34,11 @@ class ResourceSchema(colander.MappingSchema):
         :meth:`cliquet.resource.UserResource.process_record`.
         """
 
+        hidden_fields = tuple()
+        """Fields that are not displayed on collection. The value of this fields
+        can only be seen on record.
+        """
+
         preserve_unknown = False
         """Define if unknown fields should be preserved or not.
 

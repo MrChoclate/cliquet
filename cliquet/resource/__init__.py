@@ -221,6 +221,7 @@ class UserResource(object):
         limit = self._extract_limit()
         filter_fields = [f.field for f in filters]
         include_deleted = self.model.modified_field in filter_fields
+        hidden_fields = self.mapping.Options.hidden_fields
 
         pagination_rules, offset = self._extract_pagination_rules_from_token(
             limit, sorting)
@@ -230,7 +231,8 @@ class UserResource(object):
             sorting=sorting,
             limit=limit,
             pagination_rules=pagination_rules,
-            include_deleted=include_deleted)
+            include_deleted=include_deleted,
+            hidden_fields=hidden_fields)
 
         offset = offset + len(records)
         next_page = None

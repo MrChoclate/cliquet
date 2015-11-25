@@ -271,7 +271,7 @@ class Storage(MemoryBasedStorage):
                 id_field=DEFAULT_ID_FIELD,
                 modified_field=DEFAULT_MODIFIED_FIELD,
                 deleted_field=DEFAULT_DELETED_FIELD,
-                auth=None):
+                auth=None, hidden_fields=[]):
         records_ids_key = '{0}.{1}.records'.format(collection_id, parent_id)
         ids = self._client.smembers(records_ids_key)
 
@@ -304,7 +304,8 @@ class Storage(MemoryBasedStorage):
                                                  records + deleted,
                                                  filters, sorting,
                                                  id_field, deleted_field,
-                                                 pagination_rules, limit)
+                                                 pagination_rules, limit,
+                                                 hidden_fields)
 
         return records, count
 

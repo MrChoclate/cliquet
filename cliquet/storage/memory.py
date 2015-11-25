@@ -117,7 +117,7 @@ class MemoryBasedStorage(StorageBase):
 
     def extract_record_set(self, collection_id, records,
                            filters, sorting, id_field, deleted_field,
-                           pagination_rules=None, limit=None):
+                           pagination_rules=None, limit=None, hidden_fields=[]):
         """Take the list of records and handle filtering, sorting and
         pagination.
 
@@ -142,6 +142,14 @@ class MemoryBasedStorage(StorageBase):
 
         if limit:
             sorted_ = list(sorted_)[:limit]
+
+        if hidden_fields:
+            sorted_ = [
+                {
+                    key: val for key, val in record.items()
+                    if key not in hidden_fields
+                } for record in sorted_
+            ]
 
         return sorted_, total_records - filtered_deleted
 

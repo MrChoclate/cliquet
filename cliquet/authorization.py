@@ -44,6 +44,7 @@ class AuthorizationPolicy(object):
     get_bound_permissions = None
 
     def permits(self, context, principals, permission):
+        print("permits", context, principals, permission)
         if permission == PRIVATE:
             return Authenticated in principals
 
